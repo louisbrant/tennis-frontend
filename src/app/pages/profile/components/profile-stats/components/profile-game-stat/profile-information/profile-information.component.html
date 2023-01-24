@@ -1,0 +1,90 @@
+<div class="information-wrap border-radius bg-white pt-3 h-100">
+  <div class="d-flex nforhead">
+    <div class="col-6 nonepd  row">
+      <div class="col-6">
+        Age
+      </div>
+      <div class="col-6 nonepd leftpd">
+        Country
+      </div>
+    </div>
+    <div class="col-6 row">
+      <div class="col-4 nonepd leftpd">
+        Birthplace
+      </div>
+      <div class="col-4 nonepd leftpd">
+        Height
+      </div>
+      <div class="col-4 nonepd leftpd">
+        Weight
+      </div>
+    </div>
+  </div>
+  <div class="d-flex inforfooter">
+    <div class="col-6 nonepd  row ">
+      <div class="col-6 leftpd">
+        {{birthday}}({{info.birthday | date : 'dd MMM yyyy'}})
+      </div>
+      <div class="col-6 leftlpd">
+        <img [src]="'assets/icons/flags/' + info.country.acronym + '.svg'" style="width: 1.7em"><span
+          class="ms-1">{{info.country.name}}</span>
+      </div>
+    </div>
+    <div class="col-6 leftpd row">
+      <div class="col-4 leftpd">
+        {{info.information.birthplace}}
+      </div>
+      <div class="col-4 leftpd">
+        {{info.information.height}}
+      </div>
+      <div class="col-4 leftpd">
+        {{info.information.weight}}
+      </div>
+    </div>
+  </div>
+  <div class="d-flex inforhead">
+    <div class="col-6 row">
+      <div class="col-6 nonepd leftpd">
+        Plays
+      </div>
+      <div class="col-6 nonepd leftpd">
+        Favorite Surface
+      </div>
+    </div>
+    <div class="col-6 row">
+      <div class="col-4 nonepd leftpd">
+        Backhand
+      </div>
+      <div class="col-4 nonepd leftpd">
+        Turned Pro
+      </div>
+      <div class="col-4 nonepd leftpd">
+        Coach
+      </div>
+    </div>
+  </div>
+  <div class="d-flex inforfooter">
+    <div class="col-6 row nonepd  row ">
+      <div class="col-6 nonepd leftpd">
+        {{info.information.plays}}
+      </div>
+      <div class="col-6 leftlpd"><img
+          [src]="'assets/icons/' + statistics.favouriteCourt?.surface?.toLowerCase() + '.svg'" style="width: 1.7em">
+        <span class="ms-1" *ngIf="statistics.favouriteCourt?.surface">
+          {{statistics.favouriteCourt!.surface}} {{statistics.favouriteCourt!.wins! /
+          (statistics.favouriteCourt!.wins
+          + statistics.favouriteCourt!.losses) | percent}}
+        </span>
+      </div>
+    </div>
+    <div class="col-6 leftpd row">
+      <div class="col-4 leftpd ">
+        {{info.information.backhand}}
+      </div>
+      <div class="col-4 leftpd">
+        {{info.information.turnedPro}}
+      </div>
+      <div class="col-4 leftpd">
+        {{info.information.coach}}
+      </div>
+    </div>

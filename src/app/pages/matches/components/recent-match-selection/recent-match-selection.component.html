@@ -1,0 +1,177 @@
+<div class="col pt-4 pb-2">
+  <div class="carddiv">
+    <div class="header p-4 row">
+      <p class="table-title careerstatehead fw-bold">{{profileName}} Matches Played</p>
+    </div>
+
+    <div class="content_header p-3 pt-2 pb-2 d-flex" *ngIf="surfaceFilters.length&&roundFilters.length">
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="surfaceFilters"
+          [formControl]="getFormControl('court')"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="roundFilters"
+          [formControl]="getFormControl('round')"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <div class="beforediv">
+          Before:
+        </div>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [defaultValue]="yearFilters[0].value" [options]="yearFilters"
+          [formControl]="getFormControl('year')"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="weekFilters"
+          [formControl]="getFormControl('week')"></app-selector>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="row mt-3">
+        <div class="col p-1 p-md-2">
+          <ng-container *ngIf="recentMatches.length; else noStat">
+            <table class="table text-center">
+              <tbody>
+                <tr class="text-uppercase text-start table-header">
+                  <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+
+                    </span>
+                  </td>
+                  <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                      Opponent
+                    </span>
+                  </td>
+                  <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+
+                    </span>
+                  </td>
+                  <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                      Result
+                    </span>
+                  </td>
+                  <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                      SCORE
+                    </span>
+                  </td>
+                  <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                      H2H
+                    </span>
+                  </td>
+                </tr>
+                <ng-container *ngFor="let match of recentMatches">
+                  <tr class="text-start ">
+                    <td class=" pt-1 pb-1 text-left">
+                      <span class="py- py-md-2 px-0 greencolor">
+                      </span>
+                    </td>
+                    <td class=" pt-1 pb-1 text-left">
+                      <span class="py- py-md-2 px-0 greencolor">{{match.tournament.name}} {{match.date | date:
+                        'shortDate'}}
+                      </span>
+                    </td>
+                    <td class=" pt-1 pb-1 text-left">
+                      <span class="py- py-md-2 px-0 greencolor">
+                      </span>
+                    </td>
+                    <td class=" pt-1 pb-1 text-left">
+                      <span class="py- py-md-2 px-0 greencolor">
+                      </span>
+                    </td>
+                    <td class=" pt-1 pb-1 text-left">
+                      <span class="py- py-md-2 px-0 greencolor">
+                      </span>
+                    </td>
+                    <td class=" pt-1 pb-1 text-left">
+                      <span class="py- py-md-2 px-0 greencolor">
+                      </span>
+                    </td>
+                  </tr>
+                  <tr class="text-start ">
+                    <td class=" pt-3 pb-1 text-center"><span class="py- py-md-2 p-2 rounddiv ">
+                        {{match.stats && match.stat.round | shortRound : ""}}
+                      </span>
+                    </td>
+                    <td class=" pt-3 pb-1 text-left "><span class="py- py-md-2 px-0 ">
+                        <app-sportsman [number]="match.seed1" [isShortName]="false"
+                          *ngIf="!match.isWin; else secondPlayer" [fullname]="match.player1.name"
+                          [idkLeague]="match.seed1" [countryCode]="match.player1.countryAcr" [hideCountryBySize]="true"
+                          [padding]="false"></app-sportsman>
+                        <ng-template #secondPlayer>
+                          <app-sportsman [number]="match.seed1" [isShortName]="false" [fullname]="match.player2.name"
+                            [idkLeague]="match.seed2" [countryCode]="match.player2.countryAcr"
+                            [hideCountryBySize]="true" [padding]="false"></app-sportsman>
+                        </ng-template>
+                      </span>
+                    </td>
+                    <td class=" pt-3 pb-1 text-left">
+                      <span class="py-1 py-md-2 px-0 d-flex">
+                        <app-match-stat *ngIf="match.stat; else noStat"
+                          [oldWinnerInformation]="match.matchPlayed!.stat!.player_1"
+                          [oldLooserInformation]="match.matchPlayed!.stat!.player_2"
+                          [oldWinner]="match.matchPlayed!.player_1"
+                          [oldLooser]="match.matchPlayed!.player_2"></app-match-stat>
+                        <ng-template #noStat>
+                    <td>
+                      No Stat
+                    </td>
+                    </ng-template>
+                    </span>
+
+                    </td>
+                    <td class=" pt-3 pb-1 text-left"><span class="py-1 py-md-2 px-0 ">
+                        <div *ngIf="match.isWin; else lose" class="text-center me-1 result-loose loosediv"
+                          style="padding: 0 1px;">W</div>
+                        <ng-template #lose>
+                          <div class="text-center me-1 result-loose loosediv" style="padding: 0 1px;">L</div>
+                        </ng-template>
+                      </span>
+                    </td>
+                    <td class=" pt-3 pb-1 text-left"><span class="py-1 py-md-2 px-0 ">
+                        6<sup>1</sup> 3<sup>5</sup> 1<sup>6</sup> 3<sup>5</sup> 3<sup>6</sup>
+                      </span>
+                    </td>
+                    <!-- <td class=" pt-3 pb-1 text-left">
+                      <span class="py-1 py-md-2 px-0 ">
+                      {{match.result}}
+                      </span>
+                    </td> -->
+                    <td class=" pt-3 pb-1 text-left"><span class="py-1 py-md-2 px-0 " *ngIf="match.h2h; else noH2H">H2H
+                        {{match.h2h.player1Wins}}-{{match.h2h?.player2Wins}}
+                      </span>
+                      <ng-template #noH2H>
+                        <span class="py-1 py-md-2 px-0 ">No H2H</span>
+                      </ng-template>
+                    </td>
+
+                    <ng-container *ngIf="match.h2h; else noH2H">
+                      <td class="pe-md-4 pe-2"> </td>
+                    </ng-container>
+
+
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </ng-container>
+          <ng-template #noStat>
+            <div class="p-4"> No Stat</div>
+          </ng-template>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="row mt-1 pb-2 mt-md-3" *ngIf="currentPage * 10 <= matchesCount">
+        <div class="col justify-content-center align-items-center d-flex flex-column">
+          <p class="greencolor fs12" style="cursor: pointer;">Show More Matches <img
+              src="assets/icons/arrowdown-green.png" style="width: 0.8em"></p>
+        </div>
+      </div>
+      <div class="p-1 table-wrap"></div>
+    </div>
+  </div>
+</div>

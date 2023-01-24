@@ -1,0 +1,86 @@
+<div class="col pt-4">
+  <div class="carddiv">
+    <div class="header p-4 row">
+      <p class="table-title careerstatehead fw-bold">Nadal vs Federer H2H Matches Only</p>
+    </div>
+    <div class="content_header p-3 pt-2 pb-2 d-flex" *ngIf="surfaceFilters.length&&roundFilters.length">
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="surfaceFilters"
+          [formControl]="getFormControl('court')"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="roundFilters"
+          [formControl]="getFormControl('round')"></app-selector>
+      </div>
+    </div>
+    <div class="content" *ngIf="matches.length; else noMatchGroups">
+
+      <table class="table text-center">
+        <tbody>
+          <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                winning player
+              </span>
+            </td>
+            <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                loosing player
+              </span>
+            </td>
+            <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+                score
+              </span>
+            </td>
+            <td class=" pt-1 pb-1 text-left"><span class="py-1 py-md-2 px-0">
+
+              </span>
+            </td>
+          </tr>
+        <tbody>
+        <tbody>
+          <ng-container *ngFor="let match of matches">
+            <tr class="align-middle">
+              <td colspan="4" class="text-start  ps-3 ps-md-4 draw-quartal">
+                <a class="m-0 tournament-link text-decoration-none greencolor">{{match.roundId | shortRound :
+                  match.tournament.name }} - {{match.tournament.name}} {{match.date | date: 'dd/MMM/yyyy'}}</a>
+              </td>
+            </tr>
+            <tr class="align-middle">
+              <td class="ps-3 ps-md-4 text-start">
+                <app-sportsman [fullname]="match.player1.name" [idkLeague]="match.seed1"
+                  [countryCode]="match.player1.countryAcr" [hideCountryBySize]="true" [padding]="false"></app-sportsman>
+              </td>
+
+              <td class="ps-3 ps-md-4 text-start">
+                <app-sportsman [fullname]="match.player2.name" [idkLeague]="match.seed2"
+                  [countryCode]="match.player2.countryAcr" [hideCountryBySize]="true" [padding]="false"></app-sportsman>
+              </td>
+
+              <td *ngIf="match?.result">{{match.result}}</td>
+
+              <td *ngIf="match?.player1?.stats && match?.player2?.stats; else noStat">
+                <app-match-stat [winner]="match.player1" [looser]="match.player2"></app-match-stat>
+              </td>
+
+
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+
+      <div class="row mt-1 pb-2 mt-md-3">
+        <div class="col justify-content-center align-items-center d-flex flex-column">
+          <p class="greencolor fs12" style="cursor: pointer;">Show More Matches <img
+              src="assets/icons/arrowdown-green.png" style="width: 0.8em"></p>
+        </div>
+      </div>
+      <ng-template #noStat>
+        <div class="p-4">No Stat</div>
+      </ng-template>
+
+      <div class="p-1 table-wrap"></div>
+    </div>
+    <ng-template #noMatchGroups>
+      <div class="p-4">No information...</div>
+    </ng-template>
+  </div>
+</div>

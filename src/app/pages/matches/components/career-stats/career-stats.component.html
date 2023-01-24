@@ -1,0 +1,38 @@
+<div class="col pt-4">
+  <div class="carddiv">
+    <div class="header p-4 row">
+      <p class="table-title careerstatehead fw-bold">{{playerOne ? playerOne.split(' ')[1] : null}} vs {{playerTwo ?
+        playerTwo.split(' ')[1] : null}} Career Stats (All Opponents)</p>
+    </div>
+
+    <div class="content_header p-3 pt-2 pb-2 d-flex" *ngIf="careerFilters.length">
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [defaultValue]="careerFilters[0].value" [options]="careerFilters"
+          [formControl]="getFormControl('career')" (formControlChange)="changeCareer($event)"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="surfaceFilters" [formControl]="getFormControl('court')"
+          (formControlChange)="changeCourt($event)"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="roundFilters" [formControl]="getFormControl('round')"
+          (formControlChange)="changeRound($event)"></app-selector>
+      </div>
+      <div class="p-2 pt-1 pb-1">
+        <app-selector [type]="'rankingsel'" [options]="tournamentFilters" [formControl]="getFormControl('tournament')"
+          (formControlChange)="changeTournament($event)"></app-selector>
+      </div>
+    </div>
+    <div class="content">
+      <ng-container *ngIf=" noStat">
+        <div class="col-12 p-0">
+          <app-short-table [showHeader]="true" [headers]="headers" [data]="playerEventStats"></app-short-table>
+        </div>
+      </ng-container>
+      <ng-template #noStat>
+        <div class="p-4">No Stat</div>
+      </ng-template>
+      <div class="p-1 table-wrap"></div>
+    </div>
+  </div>
+</div>

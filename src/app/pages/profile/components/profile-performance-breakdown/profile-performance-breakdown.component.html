@@ -1,0 +1,45 @@
+<div class="row information-wrap">
+  <div class="col-12 p-3">
+    <div class="information-wrap border-radius bg-white px-2 px-md-3 h-100">
+      <div class="row pt-3 p-3 align-items-center">
+        <div class="col-10">
+          <p class="table-title careerstatehead fw-bold">{{player ?? 'Not Found'}} Performance Breackdown</p>
+        </div>
+        <div class="col-2" *ngIf="yearFilters.length">
+          <app-selector [options]="yearFilters" [formControl]="getFormControl('year')" name="year"
+            [defaultValue]="yearFilters[0].value"></app-selector>
+        </div>
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Tournament Level Breakdown
+      </div>
+      <div *ngIf="level[currentYear]">
+        <app-short-table class="menubottom" [height]="heightUpperTable" [headers]="tableHeaders"
+          [data]="level[currentYear]">
+        </app-short-table>
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Opponent Rank Breakdown
+      </div>
+      <div>
+        <app-short-table class="menubottom" [height]="heightUpperTable" [headers]="tableHeaders"
+          [data]="rank[currentYear]"></app-short-table>
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Surface Breakdown
+      </div>
+      <div>
+        <app-short-table class="menubottom" [height]="heightUpperTable" [headers]="tableHeaders"
+          [data]="surface[currentYear]"></app-short-table>
+
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Round Breakdown
+      </div>
+      <div>
+        <app-short-table class="menubottom" [height]="heightUpperTable" [headers]="tableHeaders"
+          [data]="round[currentYear]"></app-short-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<table class="table text-center">
+    <tbody>
+        <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">
+                    <img [src]="playerOne.image"
+                        onerror="this.onerror=null; this.src='assets/icons/sportsman-images/noprofile.bmp'"
+                        class=" playerimg"> {{
+                    playerOne.name }}
+                </span>
+            </td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0"></span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">
+                    <img [src]="playerTwo.image"
+                        onerror="this.onerror=null; this.src='assets/icons/sportsman-images/noprofile.bmp'"
+                        class=" playerimg"> {{
+                    playerTwo.name }}
+                </span>
+            </td>
+        </tr>
+        <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.total1}}</span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">Total</span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.total2}}</span></td>
+        </tr>
+        <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.hard1}}</span></td>
+            <td class=" pt-2 pb-3 text-center"><span class="py-1 py-md-2 px-0 harddiv">Hard</span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.hard2}}</span></td>
+        </tr>
+        <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.clay1}}</span></td>
+            <td class=" pt-2 pb-3 text-center"><span class="py-1 py-md-2 px-0 claydiv">Clay</span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.clay2}}</span></td>
+        </tr>
+        <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.clay1}}</span></td>
+            <td class=" pt-2 pb-3 text-center"><span class="py-1 py-md-2 px-0 indoordiv">Indoor</span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.clay2}}</span></td>
+        </tr>
+        <tr class="text-uppercase text-start table-header">
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.iHard1}}</span></td>
+            <td class=" pt-2 pb-3 text-center"><span class="py-1 py-md-2 px-0 grassdiv">Grass</span></td>
+            <td class=" pt-1 pb-1 text-center"><span class="py-1 py-md-2 px-0">{{surfaceData?.iHard2}}</span></td>
+        </tr>
+    </tbody>
+</table>

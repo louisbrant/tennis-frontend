@@ -1,0 +1,45 @@
+<div class="container mt-1">
+    <div class="row d-flex">
+        <div class="col col-md-8  pt-2">
+            <div *ngIf="(profiles$ | async) as profiles">
+                <app-player-profile [playerOne]="profiles.player1" [playerTwo]="profiles.player2"
+                    [surfaceData]="profiles.surfaceData" [statistics1]="statistics1"
+                    [statistics2]="statistics2"></app-player-profile>
+            </div>
+            <app-upcoming-match></app-upcoming-match>
+            <div class="d-flex">
+                <div class="col-6 pr-2">
+                    <app-predictions></app-predictions>
+                </div>
+                <div class="col-6 pl-2">
+                    <app-predictions></app-predictions>
+                </div>
+            </div>
+            <ng-container *ngIf="currentStatsPlayerOne && currentStatsPlayerTwo">
+                <app-current-event-stats [player1]="currentStatsPlayerOne"
+                    [player2]="currentStatsPlayerTwo"></app-current-event-stats>
+            </ng-container>
+            <app-vs-h2h-matches></app-vs-h2h-matches>
+
+            <app-vs-h2h-matches-only></app-vs-h2h-matches-only>
+            <app-career-stats></app-career-stats>
+            <app-recent-match-selection></app-recent-match-selection>
+            <app-recent-match-selection></app-recent-match-selection>
+        </div>
+
+        <ng-template #tournamentEmpty>
+            <div class="col-12 col-md-8">
+                <div *ngIf="tournamentLoadError && tournamentIsLoad">
+                    <h1 class="fw-bold text-center">Matches not found!</h1>
+                </div>
+                <div *ngIf="!tournamentLoadError && !tournamentIsLoad">
+                    <h1 class="fw-bold text-center">Matches is loading...</h1>
+                </div>
+            </div>
+        </ng-template>
+
+        <div class="col col-md-4 d-none d-md-block">
+            <app-sidebar [showInterestingH2h]="false"></app-sidebar>
+        </div>
+    </div>
+</div>

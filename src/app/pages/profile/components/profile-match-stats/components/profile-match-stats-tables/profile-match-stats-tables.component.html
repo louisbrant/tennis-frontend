@@ -1,0 +1,44 @@
+<div class="row information-wrap">
+  <div class="col-12 pb-3">
+    <div class="information-wrap bg-white h-100">
+      <div class="row pt-3 p-3 align-items-center">
+        <div class="row p-3 align-items-center">
+          <div class="col-10">
+            <p class="table-title careerstatehead fw-bold">{{info?.name ?? 'Not Found'}} Career Stats</p>
+          </div>
+          <div class="col-2" *ngIf="yearFilters.length">
+            <app-selector [defaultValue]="yearFilters[1].value" [options]="yearFilters"
+              [formControl]="getFormControl('year')">
+            </app-selector>
+          </div>
+        </div>
+      </div>
+      <app-arrow-tab [actives]="activeGroups" [width]="sizeOfArrowTabGroupwidth" [background]="sizeOfArrowTabGroupbag"
+        (activeChanged)="changeActiveGroup($event)"></app-arrow-tab>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Service Stats
+      </div>
+      <div *ngIf="serveStats && returnStats && breakServe && breakRtn">
+        <app-short-table class="menubottom" [headers]="headers" [data]="serveStats"></app-short-table>
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Return Stats
+      </div>
+      <div *ngIf="serveStats && returnStats">
+        <app-short-table class="menubottom" [headers]="headers" [data]="returnStats"></app-short-table>
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Break Points (Serve)
+      </div>
+      <div *ngIf="serveStats && returnStats">
+        <app-short-table class="menubottom" [headers]="headers" [data]="breakServe"></app-short-table>
+      </div>
+      <div class="tablehead p-3 pt-2 pb-2">
+        Break Points (Rtn)
+      </div>
+      <div *ngIf="serveStats && returnStats">
+        <app-short-table class="menubottom" [headers]="headers" [data]="breakRtn"></app-short-table>
+      </div>
+    </div>
+  </div>
+</div>

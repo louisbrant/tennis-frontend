@@ -1,0 +1,19 @@
+<div class="col pt-4">
+  <div class="carddiv">
+    <div class="header p-4 row">
+      <p class="table-title careerstatehead fw-bold">Current Event Stats For Players</p>
+    </div>
+    <div class="content_header p-5 pt-2 pb-2 d-flex">
+      <app-sportsman [isShortName]="false" [fullname]="'Egypt'" [countryCode]="'EGY'">
+      </app-sportsman>
+      <div class="p-2 pt-1">
+        <span class="py-1 py-md-2 px-0 betbtn">
+          Grass</span>
+      </div>
+    </div>
+    <div class="content">
+      <app-short-table [showHeader]="true" [headers]="headers" [data]="playerEventStats"></app-short-table>
+      <div class="p-1 table-wrap"></div>
+    </div>
+  </div>
+</div>

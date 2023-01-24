@@ -1,0 +1,136 @@
+<div class="row information-wrap__header p-4">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-3">
+                <img [src]="playerinfor.image"
+                    onerror="this.onerror=null; this.src='assets/icons/sportsman-images/noprofile.bmp'"
+                    class="w-100 playerimg">
+                <!-- style="height: 8em; object-fit: cover; object-position: 0 30%;" -->
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row ">
+                            <div class="col-12 divflex blackcolor profname">
+                                {{
+                                playerinfor.name }}
+                                <div class="statediv d-flex p-3 pt-1 pb-1">
+                                    <img src="assets/icons/Vector.png" class="statsimg">
+                                    <p class="m-0 text-nowrap overflow-visible greencolor">Stats</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row rankdiv">
+                            <div class="col-5">
+                                <div class="row ">
+                                    <div class="col-10 nonepd"
+                                        style="padding-left: calc(var(--bs-gutter-x) * 0.5) !important;">
+                                        Current Rank
+                                    </div>
+                                    <div class="col-2 nonepd greencolor">
+                                        #{{ playerinfor.currentRank ? playerinfor.currentRank : "-" }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1 nonepd">
+                                |
+                            </div>
+                            <div class="col-6 nonepd row">
+                                <div class="col-7 nonepd">
+                                    {{"Best Rank"}}
+                                </div>
+                                <div class="col-5 nonepd">
+                                    <div class="row">
+                                        <div class="col-2 nonepd greencolor">
+                                            #{{ playerinfor.bestRank }}
+                                        </div>
+                                        <div class="col-10 yeardiv">
+                                            {{2023}}
+                                        </div>
+                                    </div>
+                                    <!-- <ng-template #noRank>
+                                        <div class="px-0 py-1 text-end">
+                                            {{formatBestRank(statistics.bestRank)}}
+                                        </div>
+                                    </ng-template> -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="col-12 nonepd">
+            <div class="divflex">
+                <div class="col-6 nonepd">
+                    <div class="col-12 px-0 py-1 nonepd fsmiddle">
+                        Total Titles
+                    </div>
+                    <div class="fssmall col-12">
+                        {{statisticsval.totalTitles}}
+                    </div>
+                </div>
+                <div class="col-6 nonepd">
+                    <div class="col-12 nonepd fsmiddle">
+                        Grand Slams
+                    </div>
+                    <div class="fssmall col-12 nonepd">
+                        {{playerinfor.playerStat.slamWin}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 nonepd">
+            <div class="divflex">
+                <div class="col-6 nonepd">
+                    <div class="col-12 nonepd fsmiddle">
+                        Masters
+                    </div>
+                    <div class="fssmall col-12 nonepd">
+                        {{playerinfor.playerStat.masterWin}}
+                    </div>
+                </div>
+                <div class="col-6 nonepd">
+                    <div class="col-12 nonepd fsmiddle">
+                        Other
+                    </div>
+                    <div class="fssmall col-12 nonepd">
+                        {{playerinfor.playerStat.maintourWin+playerinfor.playerStat.challengersWin+playerinfor.playerStat.futuresWin}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 pt-2 pb-2">
+            <div class="divflex">
+                <div class="col-3 nonepd">
+                    <div class="col-12 nonepd fsmiddle">
+                        Form
+                    </div>
+                    <div class="fssmall col-12 nonepd">
+                    </div>
+                </div>
+                <div class="col-9 nonepd">
+                    <ng-container
+                        *ngTemplateOutlet="recentGames; context: {$implicit: playerinfor.recentGames}"></ng-container>
+                    <ng-template #recentGames let-recent>
+                        <div class="d-flex match-result justify-content-around">
+                            <div *ngFor="let result of recent" class="text-center" style="padding: 0 1px"
+                                [class.result-win]="result === 'w'" [class.result-loose]="result ==='l'">
+                                {{result | uppercase}}
+                            </div>
+                            <div *ngIf="!recent.length">
+                                No matches
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

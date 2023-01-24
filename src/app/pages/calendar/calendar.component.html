@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row p-2">
+    <div class="col col-md-8 pt-4">
+      <div class="carddiv">
+        <div class="header p-4 row">
+          <p class="table-title careerstatehead fw-bold">ATP / WTA Calendars</p>
+        </div>
+        <div class="content_header ">
+          <div class="content_header ">
+            <app-arrow-tab [actives]="actives" [width]="sizeOfArrowTabActivewidth"
+              [background]="sizeOfArrowTabActivebag" (activeChanged)="changeActive($event)"></app-arrow-tab>
+          </div>
+        </div>
+        <div class="content_header p-2 pt-1 pb-1 row">
+          <div class="col-6 ">
+            <div class="col-8 pt-2" [placeholder]="'Search by name'" searchInput [showBorder]="true" [size]="'short'"
+              (eventSubmit)="searchTournaments($event)" [isDebounce]="true">
+            </div>
+          </div>
+          <div class="col-6 ">
+            <form class="divflex" [formGroup]="filterFormGroup">
+              <div class="col p-1 p-md-2" *ngIf="yearFilter[0]!=undefined&&yearFilter.length">
+                <app-selector [type]="'canendersel'" [options]=" yearFilter" [formControl]="getFormControl('year')"
+                  [defaultValue]="yearFilter[0].value"></app-selector>
+              </div>
+              <div class="col p-1 p-md-2" *ngIf="levelFilter[0]!=undefined&&levelFilter.length">
+                <app-selector [type]="'canendersel'" [options]="levelFilter"
+                  [formControl]="getFormControl('level')"></app-selector>
+              </div>
+              <div class="col p-1 p-md-2" *ngIf="surfacesFilter[0]!=undefined&&surfacesFilter.length">
+                <app-selector [type]="'canendersel'" [options]="surfacesFilter"
+                  [formControl]="getFormControl('surfaces')"></app-selector>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="content">
+          <app-calendar-table [matches]="matchGrouped" [type]="type"></app-calendar-table>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-4 d-none d-md-block">
+      <app-sidebar [showAtpRanking]="false"></app-sidebar>
+    </div>
+  </div>
+</div>
